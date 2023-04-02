@@ -1,5 +1,3 @@
-# timerXtensionV2
-
 # timerXtension-v2
 
 Chrome timer extenstion build using React, Typescript, MUI.
