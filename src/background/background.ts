@@ -1,4 +1,18 @@
-// TODO: background script
+import RestTimer from "../components/timer/RestTimer";
+import {
+  getStorageOptions,
+  setStorageOptions,
+  getStoredTimerStatus,
+  setStoredTimerStatus,
+} from "../utils/storage";
 chrome.runtime.onInstalled.addListener(() => {
-  // TODO: on installed function
-})
+  setStorageOptions({
+    focusTime: 25,
+    restTime: 5,
+  });
+  setStoredTimerStatus({
+    isFocusing: false,
+    isResting: false,
+    timer: 0,
+  });
+});

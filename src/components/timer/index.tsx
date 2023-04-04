@@ -1,3 +1,3 @@
-import FocusTimer from "./FocusTimer";
+import TimerContainer from "./timerContainer";
 
-export default FocusTimer;
+export default TimerContainer;
