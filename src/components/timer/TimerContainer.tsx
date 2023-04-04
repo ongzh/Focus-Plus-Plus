@@ -68,6 +68,9 @@ const TimerContainer: React.FC<{}> = () => {
       timer: 0,
       isFocusing: false,
       isResting: false,
+    }).then(() => {
+      setFocusing(false);
+      setTimer(0);
     });
   };
 
