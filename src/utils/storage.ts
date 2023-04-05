@@ -10,6 +10,7 @@ export interface LocalStorageTimerStatus {
   isFocusing: boolean;
   isResting: boolean;
   timer: number;
+  restTimer: number;
 }
 
 export interface SyncStorageOptions {

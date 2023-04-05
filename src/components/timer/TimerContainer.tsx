@@ -6,8 +6,10 @@ import {
   getStoredTimerStatus,
   setStoredTimerStatus,
 } from "../../utils/storage";
+import RestTimer from "./RestTimer";
 const TimerContainer: React.FC<{}> = () => {
   const [timer, setTimer] = useState<number>(0);
+  const [restTimer, setRestTimer] = useState<number>(0);
   const [isFocusing, setFocusing] = useState<boolean>(false);
   const [focusTime, setFocusTime] = useState<number>(0);
   const [restTime, setRestTime] = useState<number>(0);
@@ -51,12 +53,14 @@ const TimerContainer: React.FC<{}> = () => {
       setFocusing(false);
       setStoredTimerStatus({
         timer,
+        restTimer,
         isFocusing: false,
         isResting: false,
       }).then(() => setFocusing(false));
     } else {
       setStoredTimerStatus({
         timer,
+        restTimer,
         isFocusing: true,
         isResting: false,
       }).then(() => setFocusing(true));
@@ -66,6 +70,7 @@ const TimerContainer: React.FC<{}> = () => {
   const handleResetButtonClick = () => {
     setStoredTimerStatus({
       timer: 0,
+      restTimer: 0,
       isFocusing: false,
       isResting: false,
     }).then(() => {
@@ -78,6 +83,9 @@ const TimerContainer: React.FC<{}> = () => {
     <>
       <Box>
         <FocusTimer focusTime={focusTime} timer={timer} />
+      </Box>
+      <Box>
+        <RestTimer restTime={restTime} timer={restTimer} />
       </Box>
       <Box>
         <Button onClick={handleStartButtonClick}>

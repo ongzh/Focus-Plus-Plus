@@ -10,9 +10,6 @@ const App: React.FC<{}> = () => {
       <Card>
         <CardContent>
           <TimerContainer />
-          <Typography display="inline" className="rest-timer">
-            00:00
-          </Typography>
         </CardContent>
       </Card>
     </Box>

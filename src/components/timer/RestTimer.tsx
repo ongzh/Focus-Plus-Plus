@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Typography } from "@mui/material";
 import "./timer.css";
+import { getTimeLeft } from "../../utils/time";
 
-const RestTimer: React.FC<{ duration: number }> = ({ duration }) => {
-  const [time, setTime] = useState(duration);
-
-  useEffect(() => {
-    if (time > 0) {
-      const intervalId = setInterval(() => {
-        setTime((time) => time - 1);
-      }, 1000);
-
-      return () => clearInterval(intervalId);
-    }
-  }, [time]);
-
+const RestTimer: React.FC<{
+  restTime: number;
+  timer: number;
+}> = ({ restTime, timer }) => {
   return (
-    <Typography display="inline" className="focus-timer" variant="h2">
-      {time}
+    <Typography display="inline" className="rest-timer" variant="h3">
+      {getTimeLeft(timer, restTime).minutes}:
+      {getTimeLeft(timer, restTime).seconds}
     </Typography>
   );
 };

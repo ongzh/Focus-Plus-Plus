@@ -15,6 +15,7 @@ chrome.runtime.onInstalled.addListener(() => {
     isFocusing: false,
     isResting: false,
     timer: 0,
+    restTimer: 0,
   });
 
   chrome.alarms.create("focusTimer", {
@@ -29,6 +30,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
         console.log(timerStatus.timer);
         setStoredTimerStatus({
           timer: timerStatus.timer + 1,
+          restTimer: timerStatus.restTimer,
           isFocusing: timerStatus.isFocusing,
           isResting: timerStatus.isResting,
         });
