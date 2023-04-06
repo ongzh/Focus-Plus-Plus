@@ -5,12 +5,12 @@ import { getTimeLeft } from "../../utils/time";
 
 const RestTimer: React.FC<{
   restTime: number;
-  timer: number;
-}> = ({ restTime, timer }) => {
+  restTimer: number;
+}> = ({ restTime, restTimer }) => {
   return (
     <Typography display="inline" className="rest-timer" component="h3">
-      {getTimeLeft(timer, restTime).minutes}:
-      {getTimeLeft(timer, restTime).seconds}
+      {getTimeLeft(restTimer, restTime).minutes}:
+      {getTimeLeft(restTimer, restTime).seconds}
     </Typography>
   );
 };

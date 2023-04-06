@@ -1,3 +1,4 @@
+import { lightGreen } from "@mui/material/colors";
 import RestTimer from "../components/timer/RestTimer";
 import {
   getStorageOptions,
@@ -37,7 +38,6 @@ chrome.alarms.onAlarm.addListener((alarm) => {
         if (timerStatus.isFocusing) {
           timer++;
           if (timer >= options.focusTime * 60) {
-            timer = 0;
             isFocusing = false;
             isResting = true;
 
@@ -45,29 +45,35 @@ chrome.alarms.onAlarm.addListener((alarm) => {
               body: `${options.focusTime} minutes has passed! Rest time starts now!`,
               icon: "icon.png",
             });
-            const badgeTime = getTimeLeft(timer, options.focusTime);
-            chrome.action.setBadgeText({
-              text: `${badgeTime.minutes}:${badgeTime.seconds}`,
-            });
           }
+          const badgeTime = getTimeLeft(timer, options.focusTime);
+          chrome.action.setBadgeText({
+            text: `${badgeTime.minutes}:${badgeTime.seconds}`,
+          });
+          chrome.action.setBadgeBackgroundColor({
+            color: "green",
+          });
         } else if (timerStatus.isResting) {
           restTimer++;
           if (restTimer >= options.restTime * 60) {
             restTimer = 0;
-            isResting = false;
+            timer = 0;
 
             registration.showNotification("Rest Time is Over!", {
               body: `${options.restTime} minutes has passed! Start another focus session!`,
               icon: "icon.png",
             });
-            const badgeTime = getTimeLeft(restTimer, options.restTime);
-            chrome.action.setBadgeText({
-              text: `${badgeTime.minutes}:${badgeTime.seconds}`,
-            });
           }
+          const badgeTime = getTimeLeft(restTimer, options.restTime);
+          chrome.action.setBadgeText({
+            text: `${badgeTime.minutes}:${badgeTime.seconds}`,
+          });
+          chrome.action.setBadgeBackgroundColor({
+            color: "red",
+          });
         } else {
           chrome.action.setBadgeText({
-            text: "REST",
+            text: "",
           });
         }
         setStoredTimerStatus({

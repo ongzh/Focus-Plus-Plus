@@ -18,7 +18,9 @@ const TimerContainer: React.FC<{}> = () => {
   useEffect(() => {
     getStoredTimerStatus().then((timerStatus) => {
       setFocusing(timerStatus.isFocusing);
+      setResting(timerStatus.isResting);
       setTimer(timerStatus.timer);
+      setRestTimer(timerStatus.restTimer);
     });
   }, []);
 
@@ -39,6 +41,22 @@ const TimerContainer: React.FC<{}> = () => {
       clearInterval(intervalRef.current);
     };
   }, [isFocusing]);
+
+  useEffect(() => {
+    if (isResting) {
+      intervalRef.current = setInterval(() => {
+        getStoredTimerStatus().then((timerValue) => {
+          setRestTimer(timerValue.restTimer);
+        });
+      }, 1000);
+    } else {
+      clearInterval(intervalRef.current);
+    }
+
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  }, [isResting]);
 
   useEffect(() => {
     getStorageOptions().then((options) => {
@@ -80,16 +98,31 @@ const TimerContainer: React.FC<{}> = () => {
     });
   };
 
-  const handleFinishButtonClick = () => {
-    setStoredTimerStatus({
-      timer: 0,
-      restTimer: 0,
-      isFocusing: !isFocusing,
-      isResting: !isResting,
-    }).then(() => {
-      setFocusing(false);
-      setTimer(0);
-    });
+  const handleEndButtonClick = () => {
+    if (isFocusing) {
+      setStoredTimerStatus({
+        timer: focusTime * 60,
+        restTimer,
+        isFocusing: false,
+        isResting: true,
+      }).then(() => {
+        setFocusing(false);
+        setResting(true);
+        setTimer(focusTime * 60);
+      });
+    } else {
+      setStoredTimerStatus({
+        timer: 0,
+        restTimer: 0,
+        isFocusing: false,
+        isResting: false,
+      }).then(() => {
+        setFocusing(false);
+        setResting(false);
+        setRestTimer(0);
+        setTimer(0);
+      });
+    }
   };
 
   return (
@@ -98,14 +131,14 @@ const TimerContainer: React.FC<{}> = () => {
         <FocusTimer focusTime={focusTime} timer={timer} />
       </Box>
       <Box>
-        <RestTimer restTime={restTime} timer={restTimer} />
+        <RestTimer restTime={restTime} restTimer={restTimer} />
       </Box>
       <Box>
         <Button onClick={handleStartButtonClick}>
           {isFocusing ? "Pause Timer" : "Start Timer"}
         </Button>
         <Button onClick={handleResetButtonClick}>Reset Timer</Button>
-        <Button> Finish </Button>
+        <Button onClick={handleEndButtonClick}> End Timer </Button>
       </Box>
     </>
   );
