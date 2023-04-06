@@ -4,6 +4,7 @@ import "./popup.css";
 import { Box, Paper, Card, Typography, CardContent } from "@mui/material";
 import FocusTimer from "../components/timer";
 import TimerContainer from "../components/timer";
+import TaskContainer from "../components/tasks";
 const App: React.FC<{}> = () => {
   return (
     <Box>
@@ -12,6 +13,7 @@ const App: React.FC<{}> = () => {
           <TimerContainer />
         </CardContent>
       </Card>
+      <TaskContainer />
     </Box>
   );
 };

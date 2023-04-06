@@ -4,6 +4,8 @@ export interface LocalStorage {
 
 export interface SyncStorage {
   options?: SyncStorageOptions;
+  tasks?: string[];
+  taskCompletionCount?: number;
 }
 
 export interface LocalStorageTimerStatus {
@@ -61,6 +63,46 @@ export function getStorageOptions(): Promise<SyncStorageOptions> {
   return new Promise((resolve) => {
     chrome.storage.local.get(keys, (res: SyncStorage) => {
       resolve(res.options);
+    });
+  });
+}
+
+export function setStoredTasks(tasks: string[]): Promise<void> {
+  const vals: SyncStorage = {
+    tasks,
+  };
+  return new Promise((resolve) => {
+    chrome.storage.sync.set(vals, () => {
+      resolve();
+    });
+  });
+}
+
+export function getStoredTasks(): Promise<string[]> {
+  const keys: SyncStorageKeys[] = ["tasks"];
+  return new Promise((resolve) => {
+    chrome.storage.sync.get(keys, (res: SyncStorage) => {
+      resolve(res.tasks);
+    });
+  });
+}
+
+export function getStoredTaskCompletionCount(): Promise<number> {
+  const keys: SyncStorageKeys[] = ["taskCompletionCount"];
+  return new Promise((resolve) => {
+    chrome.storage.sync.get(keys, (res: SyncStorage) => {
+      resolve(res.taskCompletionCount);
+    });
+  });
+}
+
+export function setStoredCompletedTaskCount(count: number): Promise<void> {
+  const vals: SyncStorage = {
+    taskCompletionCount: count,
+  };
+  return new Promise((resolve) => {
+    chrome.storage.sync.set(vals, () => {
+      resolve();
     });
   });
 }
