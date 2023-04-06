@@ -14,33 +14,45 @@ import {
   OutlinedInput,
   InputAdornment,
   FormHelperText,
+  useAutocomplete,
 } from "@mui/material";
 import { SyncStorageOptions } from "../utils/storage";
 import { getStorageOptions, setStorageOptions } from "../utils/storage";
 type FormState = "ready" | "saving";
 
 const App: React.FC<{}> = () => {
-  const [options, setOptions] = useState<SyncStorageOptions | "">("");
+  //const [options, setOptions] = useState<SyncStorageOptions | null>(null);
+  const [restTime, setRestTime] = useState<number | null>(0);
+  const [focusTime, setFocusTime] = useState<number | null>(0);
   const [formState, setFormState] = useState<FormState>("ready");
 
   useEffect(() => {
     getStorageOptions().then((options) => {
-      setOptions(options);
+      setRestTime(options.restTime);
+      setFocusTime(options.focusTime);
     });
   }, []);
 
-  const handleFocusTimeChange = (input: string) => {
-    const focusTime = parseInt(input);
-    if (focusTime > 60 || focusTime < 0 || isNaN(focusTime)) {
-      return;
+  const handleFocusTimeChange = (focusTime: number) => {
+    if (focusTime > 60 || focusTime < 0) {
+      focusTime = 25;
     }
-    setOptions({ ...options, focusTime });
+    setFocusTime(focusTime);
   };
 
-  const handleRestTimerChange = (restTime: number) => {};
+  const handleRestTimerChange = (restTime: number) => {
+    if (restTime > 60 || restTime < 0) {
+      restTime = 5;
+    }
+    setRestTime(restTime);
+  };
 
   const handleSaveButtonClick = () => {
     setFormState("saving");
+    const options = {
+      restTime,
+      focusTime,
+    };
     setStorageOptions(options).then(() => {
       setTimeout(() => {
         setFormState("ready");
@@ -70,8 +82,11 @@ const App: React.FC<{}> = () => {
                   inputProps={{
                     "aria-label": "weight",
                   }}
-                  onChange={(e) => handleFocusTimeChange(e.target.value)}
-                  value={options?.focusTime}
+                  type="number"
+                  onChange={(e) =>
+                    handleFocusTimeChange(e.target.value as unknown as number)
+                  }
+                  value={focusTime}
                 />
                 <FormHelperText id="outlined-weight-helper-text">
                   0 - 60 mins
@@ -87,9 +102,14 @@ const App: React.FC<{}> = () => {
                     <InputAdornment position="end">minutes</InputAdornment>
                   }
                   aria-describedby="outlined-weight-helper-text"
+                  type="number"
                   inputProps={{
                     "aria-label": "weight",
                   }}
+                  onChange={(e) =>
+                    handleRestTimerChange(e.target.value as unknown as number)
+                  }
+                  value={restTime}
                 />
                 <FormHelperText id="outlined-weight-helper-text">
                   0 - 60 mins
