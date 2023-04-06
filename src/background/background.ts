@@ -62,6 +62,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
           if (restTimer >= options.restTime * 60) {
             restTimer = 0;
             timer = 0;
+            isResting = false;
 
             registration.showNotification("Rest Time is Over!", {
               body: `${options.restTime} minutes has passed! Start another focus session!`,
