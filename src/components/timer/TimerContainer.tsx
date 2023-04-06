@@ -11,6 +11,7 @@ const TimerContainer: React.FC<{}> = () => {
   const [timer, setTimer] = useState<number>(0);
   const [restTimer, setRestTimer] = useState<number>(0);
   const [isFocusing, setFocusing] = useState<boolean>(false);
+  const [isResting, setResting] = useState<boolean>(false);
   const [focusTime, setFocusTime] = useState<number>(0);
   const [restTime, setRestTime] = useState<number>(0);
 
@@ -79,6 +80,18 @@ const TimerContainer: React.FC<{}> = () => {
     });
   };
 
+  const handleFinishButtonClick = () => {
+    setStoredTimerStatus({
+      timer: 0,
+      restTimer: 0,
+      isFocusing: !isFocusing,
+      isResting: !isResting,
+    }).then(() => {
+      setFocusing(false);
+      setTimer(0);
+    });
+  };
+
   return (
     <>
       <Box>
@@ -92,6 +105,7 @@ const TimerContainer: React.FC<{}> = () => {
           {isFocusing ? "Pause Timer" : "Start Timer"}
         </Button>
         <Button onClick={handleResetButtonClick}>Reset Timer</Button>
+        <Button> Finish </Button>
       </Box>
     </>
   );

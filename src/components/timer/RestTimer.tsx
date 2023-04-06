@@ -8,7 +8,7 @@ const RestTimer: React.FC<{
   timer: number;
 }> = ({ restTime, timer }) => {
   return (
-    <Typography display="inline" className="rest-timer" variant="h3">
+    <Typography display="inline" className="rest-timer" component="h3">
       {getTimeLeft(timer, restTime).minutes}:
       {getTimeLeft(timer, restTime).seconds}
     </Typography>
