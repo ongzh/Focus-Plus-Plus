@@ -6,10 +6,21 @@ const Footer: React.FC<{ taskCount: number; resetCount: () => void }> = ({
   taskCount,
   resetCount,
 }) => {
+  const [currentTime, setCurrentTime] = useState(new Date());
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <Box>
       <Typography>{taskCount}</Typography>
       <Button onClick={resetCount}>reset</Button>
+      <Typography>
+        Current time right now is: {currentTime.toLocaleTimeString()}
+      </Typography>
     </Box>
   );
 };
