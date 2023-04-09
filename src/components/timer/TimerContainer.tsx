@@ -103,8 +103,8 @@ const TimerContainer: React.FC<{}> = () => {
       setStoredTimerStatus({
         timer: focusTime * 60,
         restTimer,
-        isFocusing: false,
-        isResting: true,
+        isFocusing,
+        isResting,
       }).then(() => {
         setFocusing(false);
         setResting(true);
@@ -113,9 +113,9 @@ const TimerContainer: React.FC<{}> = () => {
     } else {
       setStoredTimerStatus({
         timer: 0,
-        restTimer: 0,
-        isFocusing: false,
-        isResting: false,
+        restTimer: restTime * 60,
+        isFocusing,
+        isResting,
       }).then(() => {
         setFocusing(false);
         setResting(false);
