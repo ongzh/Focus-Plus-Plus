@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Paper, Stack } from "@mui/material";
 import FocusTimer from "./FocusTimer";
 import {
   getStorageOptions,
@@ -7,6 +7,11 @@ import {
   setStoredTimerStatus,
 } from "../../utils/storage";
 import RestTimer from "./RestTimer";
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
+import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
+import SkipNextRoundedIcon from "@mui/icons-material/SkipNextRounded";
+import RestartAltRoundedIcon from "@mui/icons-material/RestartAltRounded";
+
 const TimerContainer: React.FC<{}> = () => {
   const [timer, setTimer] = useState<number>(0);
   const [restTimer, setRestTimer] = useState<number>(0);
@@ -127,19 +132,37 @@ const TimerContainer: React.FC<{}> = () => {
 
   return (
     <>
-      <Box>
-        <FocusTimer focusTime={focusTime} timer={timer} />
-      </Box>
-      <Box>
-        <RestTimer restTime={restTime} restTimer={restTimer} />
-      </Box>
-      <Box>
-        <Button onClick={handleStartButtonClick}>
-          {isFocusing ? "Pause Timer" : "Start Timer"}
-        </Button>
-        <Button onClick={handleResetButtonClick}>Reset Timer</Button>
-        <Button onClick={handleEndButtonClick}> End Timer </Button>
-      </Box>
+      <Paper className="time-container">
+        <Box className="timer-container">
+          <FocusTimer focusTime={focusTime} timer={timer} />
+          <RestTimer restTime={restTime} restTimer={restTimer} />
+        </Box>
+        <Stack direction="row" spacing={2} justifyContent="center">
+          <Button
+            variant="outlined"
+            onClick={handleStartButtonClick}
+            endIcon={
+              isFocusing ? <PauseRoundedIcon /> : <PlayArrowRoundedIcon />
+            }
+          >
+            {isFocusing ? "Pause" : "Start"}
+          </Button>
+          <Button
+            variant="outlined"
+            onClick={handleResetButtonClick}
+            endIcon={<RestartAltRoundedIcon />}
+          >
+            Reset
+          </Button>
+          <Button
+            variant="outlined"
+            onClick={handleEndButtonClick}
+            endIcon={<SkipNextRoundedIcon />}
+          >
+            End
+          </Button>
+        </Stack>
+      </Paper>
     </>
   );
 };

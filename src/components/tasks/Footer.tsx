@@ -17,13 +17,13 @@ const Footer: React.FC<{ taskCount: number; resetCount: () => void }> = ({
 
   return (
     <Box>
-      <Typography>{taskCount}</Typography>
-      <IconButton onClick={resetCount}>
-        <RefreshRoundedIcon color="primary" />
-      </IconButton>
-      <Typography>
-        Current time right now is: {currentTime.toLocaleTimeString()}
-      </Typography>
+      <Box style={{ display: "flex", alignItems: "center" }}>
+        <Typography>Tasks Completed: {taskCount}</Typography>
+        <IconButton onClick={resetCount}>
+          <RefreshRoundedIcon color="primary" />
+        </IconButton>
+      </Box>
+      <Typography>Time: {currentTime.toLocaleTimeString()}</Typography>
     </Box>
   );
 };

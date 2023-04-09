@@ -8,11 +8,8 @@ import TaskContainer from "../components/tasks";
 const App: React.FC<{}> = () => {
   return (
     <Box>
-      <Card>
-        <CardContent>
-          <TimerContainer />
-        </CardContent>
-      </Card>
+      <TimerContainer />
+
       <TaskContainer />
     </Box>
   );
