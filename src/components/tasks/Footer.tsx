@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Typography, InputBase } from "@mui/material";
+import { Box, Button, Typography, InputBase, IconButton } from "@mui/material";
 import { getStoredTaskCompletionCount } from "../../utils/storage";
+import RefreshRoundedIcon from "@mui/icons-material/RefreshRounded";
 
 const Footer: React.FC<{ taskCount: number; resetCount: () => void }> = ({
   taskCount,
@@ -17,7 +18,9 @@ const Footer: React.FC<{ taskCount: number; resetCount: () => void }> = ({
   return (
     <Box>
       <Typography>{taskCount}</Typography>
-      <Button onClick={resetCount}>reset</Button>
+      <IconButton onClick={resetCount}>
+        <RefreshRoundedIcon color="primary" />
+      </IconButton>
       <Typography>
         Current time right now is: {currentTime.toLocaleTimeString()}
       </Typography>

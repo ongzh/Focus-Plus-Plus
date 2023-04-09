@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Typography, InputBase } from "@mui/material";
+import { Box, Button, Typography, InputBase, IconButton } from "@mui/material";
 import {
   getStoredTaskCompletionCount,
   getStoredTasks,
   setStoredCompletedTaskCount,
   setStoredTasks,
 } from "../../utils/storage";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
+import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
+import { pink } from "@mui/material/colors";
 import Footer from "./Footer";
 
 const Task: React.FC<{
@@ -16,8 +20,12 @@ const Task: React.FC<{
   return (
     <Box>
       <Typography>{task}</Typography>
-      <Button onClick={handleDeleteTask}>delete</Button>
-      <Button onClick={handleCompleteTask}>complete</Button>
+      <IconButton onClick={handleDeleteTask}>
+        <ClearRoundedIcon sx={{ color: pink[500] }} />
+      </IconButton>
+      <IconButton onClick={handleCompleteTask}>
+        <CheckRoundedIcon color="success" />
+      </IconButton>
     </Box>
   );
 };
@@ -77,7 +85,9 @@ export const TaskContainer: React.FC<{}> = () => {
           setNewTask(event.target.value);
         }}
       />
-      <Button onClick={handleAddTask}>Add Task</Button>
+      <IconButton onClick={handleAddTask}>
+        <AddRoundedIcon color="primary" />
+      </IconButton>
       <Box>
         {tasks.map((task, index) => (
           <Task
