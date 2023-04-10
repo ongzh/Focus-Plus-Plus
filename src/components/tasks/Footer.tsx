@@ -16,14 +16,23 @@ const Footer: React.FC<{ taskCount: number; resetCount: () => void }> = ({
   }, []);
 
   return (
-    <Box>
-      <Box style={{ display: "flex", alignItems: "center" }}>
+    <Box
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        flexDirection: "row",
+        position: "fixed",
+        bottom: 0,
+      }}
+    >
+      <Typography>Time: {currentTime.toLocaleTimeString()}</Typography>
+      <Box style={{ display: "flex", alignItems: "center", marginLeft: 96 }}>
         <Typography>Tasks Completed: {taskCount}</Typography>
         <IconButton onClick={resetCount}>
           <RefreshRoundedIcon color="primary" />
         </IconButton>
       </Box>
-      <Typography>Time: {currentTime.toLocaleTimeString()}</Typography>
     </Box>
   );
 };
