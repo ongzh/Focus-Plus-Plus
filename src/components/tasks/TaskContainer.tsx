@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Typography, InputBase, IconButton } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  InputBase,
+  IconButton,
+  TextField,
+  Grid,
+  Paper,
+} from "@mui/material";
 import {
   getStoredTaskCompletionCount,
   getStoredTasks,
@@ -11,6 +20,7 @@ import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import { pink } from "@mui/material/colors";
 import Footer from "./Footer";
+import "./tasks.css";
 
 const Task: React.FC<{
   task: string;
@@ -77,17 +87,25 @@ export const TaskContainer: React.FC<{}> = () => {
   };
 
   return (
-    <Box>
-      <InputBase
-        placeholder="Add a task to complete"
-        value={newTask}
-        onChange={(event) => {
-          setNewTask(event.target.value);
-        }}
-      />
-      <IconButton onClick={handleAddTask}>
-        <AddRoundedIcon color="primary" />
-      </IconButton>
+    <Box display="flex" justifyContent="center" alignItems="center">
+      <Grid container alignItems="center" justifyContent="center">
+        <Grid item>
+          <TextField
+            id="add-task-input"
+            placeholder="Add a task to complete..."
+            value={newTask}
+            variant="outlined"
+            onChange={(event) => {
+              setNewTask(event.target.value);
+            }}
+          />
+        </Grid>
+        <Grid item>
+          <IconButton onClick={handleAddTask}>
+            <AddRoundedIcon color="primary" />
+          </IconButton>
+        </Grid>
+      </Grid>
       <Box>
         {tasks.map((task, index) => (
           <Task
