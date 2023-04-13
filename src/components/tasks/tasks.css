@@ -1,6 +1,7 @@
 #add-task-input {
-  height: 12px;
+  height: 14px;
   padding: 8px;
+  width: 240px;
 }
 
 #task-container {
@@ -9,4 +10,10 @@
   margin-bottom: 12px;
   display: flex;
   flex-direction: column;
+}
+
+#task {
+  height: 14px;
+  padding: 8px;
+  width: 240px;
 }

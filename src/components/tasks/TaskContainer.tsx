@@ -29,7 +29,16 @@ const Task: React.FC<{
 }> = ({ task, handleCompleteTask, handleDeleteTask }) => {
   return (
     <Box>
-      <Typography>{task}</Typography>
+      <TextField
+        id="task"
+        value={task}
+        variant="standard"
+        InputProps={{
+          style: { pointerEvents: "none" }, // Disable pointer events
+          readOnly: true,
+        }}
+        margin="none"
+      />
       <IconButton onClick={handleDeleteTask}>
         <ClearRoundedIcon sx={{ color: pink[500] }} />
       </IconButton>
@@ -90,7 +99,7 @@ export const TaskContainer: React.FC<{}> = () => {
     <>
       <Paper id="task-container" elevation={3}>
         <Grid container alignItems="center" justifyContent="center">
-          <Grid item>
+          <Grid item marginTop={1}>
             <TextField
               id="add-task-input"
               placeholder="Add a task to complete..."
@@ -101,14 +110,20 @@ export const TaskContainer: React.FC<{}> = () => {
               }}
             />
           </Grid>
-          <Grid item>
+          <Grid item marginTop={1}>
             <IconButton onClick={handleAddTask}>
               <AddRoundedIcon color="primary" />
             </IconButton>
           </Grid>
         </Grid>
 
-        <Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           {tasks.map((task, index) => (
             <Task
               task={task}
