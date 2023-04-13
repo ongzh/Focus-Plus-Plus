@@ -8,7 +8,7 @@ const FocusTimer: React.FC<{
   timer: number;
 }> = ({ focusTime, timer }) => {
   return (
-    <Typography display="inline" className="focus-timer" variant="h2">
+    <Typography display="inline" className="focus-timer" variant="h3">
       {getTimeLeft(timer, focusTime).minutes}:
       {getTimeLeft(timer, focusTime).seconds}
     </Typography>

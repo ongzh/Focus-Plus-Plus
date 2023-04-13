@@ -12,7 +12,7 @@ const RestTimer: React.FC<{
       display="inline"
       className="rest-timer"
       component="h3"
-      variant="h5"
+      variant="h6"
       alignSelf={"flex-end"}
     >
       {getTimeLeft(restTimer, restTime).minutes}:
