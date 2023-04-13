@@ -87,37 +87,41 @@ export const TaskContainer: React.FC<{}> = () => {
   };
 
   return (
-    <Box display="flex" justifyContent="center" alignItems="center">
-      <Grid container alignItems="center" justifyContent="center">
-        <Grid item>
-          <TextField
-            id="add-task-input"
-            placeholder="Add a task to complete..."
-            value={newTask}
-            variant="outlined"
-            onChange={(event) => {
-              setNewTask(event.target.value);
-            }}
-          />
+    <>
+      <Paper id="task-container" elevation={3}>
+        <Grid container alignItems="center" justifyContent="center">
+          <Grid item>
+            <TextField
+              id="add-task-input"
+              placeholder="Add a task to complete..."
+              value={newTask}
+              variant="outlined"
+              onChange={(event) => {
+                setNewTask(event.target.value);
+              }}
+            />
+          </Grid>
+          <Grid item>
+            <IconButton onClick={handleAddTask}>
+              <AddRoundedIcon color="primary" />
+            </IconButton>
+          </Grid>
         </Grid>
-        <Grid item>
-          <IconButton onClick={handleAddTask}>
-            <AddRoundedIcon color="primary" />
-          </IconButton>
-        </Grid>
-      </Grid>
-      <Box>
-        {tasks.map((task, index) => (
-          <Task
-            task={task}
-            key={index}
-            handleCompleteTask={() => handleCompleteTask(index)}
-            handleDeleteTask={() => handleDeleteTask(index)}
-          />
-        ))}
-      </Box>
-      <Footer taskCount={taskCount} resetCount={handleResetTaskCount} />
-    </Box>
+
+        <Box>
+          {tasks.map((task, index) => (
+            <Task
+              task={task}
+              key={index}
+              handleCompleteTask={() => handleCompleteTask(index)}
+              handleDeleteTask={() => handleDeleteTask(index)}
+            />
+          ))}
+        </Box>
+
+        <Footer taskCount={taskCount} resetCount={handleResetTaskCount} />
+      </Paper>
+    </>
   );
 };
 

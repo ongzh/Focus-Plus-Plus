@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Typography, InputBase, IconButton } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  InputBase,
+  IconButton,
+  Paper,
+} from "@mui/material";
 import { getStoredTaskCompletionCount } from "../../utils/storage";
 import RefreshRoundedIcon from "@mui/icons-material/RefreshRounded";
 
@@ -22,14 +29,14 @@ const Footer: React.FC<{ taskCount: number; resetCount: () => void }> = ({
         alignItems: "center",
         justifyContent: "space-between",
         flexDirection: "row",
-        position: "fixed",
+        marginTop: "auto",
         bottom: 0,
       }}
     >
-      <Typography variant="body2" component="h3">
+      <Typography variant="body2" component="h3" marginLeft={"10px"}>
         Time: {currentTime.toLocaleTimeString()}
       </Typography>
-      <Box style={{ display: "flex", alignItems: "center", marginLeft: 80 }}>
+      <Box style={{ display: "flex", alignItems: "center" }}>
         <Typography variant="body2" component="h3">
           Tasks Completed: {taskCount}
         </Typography>

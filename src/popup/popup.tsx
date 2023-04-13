@@ -11,6 +11,7 @@ const App: React.FC<{}> = () => {
       <TimerContainer />
 
       <TaskContainer />
+      <Box height="12px"></Box>
     </Box>
   );
 };
