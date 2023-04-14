@@ -139,6 +139,7 @@ const TimerContainer: React.FC<{}> = () => {
         </Box>
         <Stack direction="row" spacing={2} justifyContent="center">
           <Button
+            fullWidth
             variant="outlined"
             onClick={handleStartButtonClick}
             endIcon={
@@ -148,6 +149,7 @@ const TimerContainer: React.FC<{}> = () => {
             {isFocusing ? "Pause" : "Start"}
           </Button>
           <Button
+            fullWidth
             variant="outlined"
             onClick={handleResetButtonClick}
             endIcon={<RestartAltRoundedIcon />}
@@ -155,6 +157,7 @@ const TimerContainer: React.FC<{}> = () => {
             Reset
           </Button>
           <Button
+            fullWidth
             variant="outlined"
             onClick={handleEndButtonClick}
             endIcon={<SkipNextRoundedIcon />}
