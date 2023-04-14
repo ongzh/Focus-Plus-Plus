@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Box, Button, Paper, Stack } from "@mui/material";
+import { Box, Button, Paper, Stack, LinearProgress } from "@mui/material";
 import FocusTimer from "./FocusTimer";
 import {
   getStorageOptions,
@@ -136,6 +136,17 @@ const TimerContainer: React.FC<{}> = () => {
         <Box className="timer-container">
           <FocusTimer focusTime={focusTime} timer={timer} />
           <RestTimer restTime={restTime} restTimer={restTimer} />
+        </Box>
+        <Box m={2}>
+          <LinearProgress
+            variant="determinate"
+            value={
+              isFocusing
+                ? (timer * 100) / (focusTime * 60)
+                : (restTimer * 100) / (restTime * 60)
+            }
+            color={isFocusing ? "primary" : "inherit"}
+          ></LinearProgress>
         </Box>
         <Stack direction="row" spacing={2} justifyContent="center">
           <Button
