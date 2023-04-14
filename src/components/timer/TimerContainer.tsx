@@ -15,10 +15,10 @@ import RestartAltRoundedIcon from "@mui/icons-material/RestartAltRounded";
 const TimerContainer: React.FC<{}> = () => {
   const [timer, setTimer] = useState<number>(0);
   const [restTimer, setRestTimer] = useState<number>(0);
-  const [isFocusing, setFocusing] = useState<boolean>(false);
-  const [isResting, setResting] = useState<boolean>(false);
   const [focusTime, setFocusTime] = useState<number>(0);
   const [restTime, setRestTime] = useState<number>(0);
+  const [isFocusing, setFocusing] = useState<boolean>(false);
+  const [isResting, setResting] = useState<boolean>(false);
 
   useEffect(() => {
     getStoredTimerStatus().then((timerStatus) => {
@@ -72,15 +72,23 @@ const TimerContainer: React.FC<{}> = () => {
   }, [focusTime, restTime]);
 
   const handleStartButtonClick = () => {
-    if (isFocusing) {
-      console.log("stop");
-      setFocusing(false);
+    if (isFocusing || isResting) {
       setStoredTimerStatus({
         timer,
         restTimer,
         isFocusing: false,
         isResting: false,
-      }).then(() => setFocusing(false));
+      }).then(() => {
+        setFocusing(false);
+        setResting(false);
+      });
+    } else if (focusTime * 60 <= timer) {
+      setStoredTimerStatus({
+        timer,
+        restTimer,
+        isFocusing: false,
+        isResting: true,
+      }).then(() => setResting(true));
     } else {
       setStoredTimerStatus({
         timer,
@@ -99,6 +107,7 @@ const TimerContainer: React.FC<{}> = () => {
       isResting: false,
     }).then(() => {
       setFocusing(false);
+      setResting(false);
       setTimer(0);
     });
   };
@@ -115,7 +124,7 @@ const TimerContainer: React.FC<{}> = () => {
         setResting(true);
         setTimer(focusTime * 60);
       });
-    } else {
+    } else if (isResting) {
       setStoredTimerStatus({
         timer: 0,
         restTimer: restTime * 60,
@@ -137,7 +146,7 @@ const TimerContainer: React.FC<{}> = () => {
           <FocusTimer focusTime={focusTime} timer={timer} />
           <RestTimer restTime={restTime} restTimer={restTimer} />
         </Box>
-        <Box m={2}>
+        <Box m={1.5}>
           <LinearProgress
             variant="determinate"
             value={
@@ -151,16 +160,22 @@ const TimerContainer: React.FC<{}> = () => {
         <Stack direction="row" spacing={2} justifyContent="center">
           <Button
             fullWidth
+            size="small"
             variant="outlined"
             onClick={handleStartButtonClick}
             endIcon={
-              isFocusing ? <PauseRoundedIcon /> : <PlayArrowRoundedIcon />
+              isFocusing || isResting ? (
+                <PauseRoundedIcon />
+              ) : (
+                <PlayArrowRoundedIcon />
+              )
             }
           >
-            {isFocusing ? "Pause" : "Start"}
+            {isFocusing || isResting ? "Pause" : "Start"}
           </Button>
           <Button
             fullWidth
+            size="small"
             variant="outlined"
             onClick={handleResetButtonClick}
             endIcon={<RestartAltRoundedIcon />}
@@ -169,6 +184,7 @@ const TimerContainer: React.FC<{}> = () => {
           </Button>
           <Button
             fullWidth
+            size="small"
             variant="outlined"
             onClick={handleEndButtonClick}
             endIcon={<SkipNextRoundedIcon />}
