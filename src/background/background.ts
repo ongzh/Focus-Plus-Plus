@@ -74,9 +74,9 @@ chrome.alarms.onAlarm.addListener((alarm) => {
             text: `${badgeTime.minutes}:${badgeTime.seconds}`,
           });
           chrome.action.setBadgeBackgroundColor({
-            color: "red",
+            color: "orange",
           });
-        } else {
+        } else if (timer == 0 && restTimer == 0) {
           chrome.action.setBadgeText({
             text: "",
           });
