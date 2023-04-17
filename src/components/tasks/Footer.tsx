@@ -40,7 +40,10 @@ const Footer: React.FC<{ taskCount: number; resetCount: () => void }> = ({
         <Typography variant="body2" component="h3">
           Tasks Completed: {taskCount}
         </Typography>
-        <IconButton onClick={resetCount}>
+        <IconButton
+          onClick={resetCount}
+          aria-label="reset completed task count"
+        >
           <RefreshRoundedIcon color="primary" />
         </IconButton>
       </Box>

@@ -43,7 +43,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
   chrome.contextMenus.create({
     contexts: ["page"],
-    title: "Reset Focus Session",
+    title: "Reset Timer",
     id: "resetTimer",
     parentId: "focusMenu",
   });

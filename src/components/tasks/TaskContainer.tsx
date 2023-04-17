@@ -39,10 +39,10 @@ const Task: React.FC<{
         }}
         margin="none"
       />
-      <IconButton onClick={handleDeleteTask}>
+      <IconButton onClick={handleDeleteTask} aria-label="delete task">
         <ClearRoundedIcon sx={{ color: pink[500] }} />
       </IconButton>
-      <IconButton onClick={handleCompleteTask}>
+      <IconButton onClick={handleCompleteTask} aria-label="complete task">
         <CheckRoundedIcon color="success" />
       </IconButton>
     </Box>
@@ -103,15 +103,21 @@ export const TaskContainer: React.FC<{}> = () => {
             <TextField
               id="add-task-input"
               placeholder="Add a task to complete..."
+              aria-label="Add a task to complete"
               value={newTask}
               variant="outlined"
               onChange={(event) => {
                 setNewTask(event.target.value);
               }}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  handleAddTask();
+                }
+              }}
             />
           </Grid>
           <Grid item marginTop={1}>
-            <IconButton onClick={handleAddTask}>
+            <IconButton onClick={handleAddTask} aria-label="add task">
               <AddRoundedIcon color="primary" />
             </IconButton>
           </Grid>
