@@ -15,6 +15,8 @@ import {
   InputAdornment,
   FormHelperText,
   useAutocomplete,
+  FormControlLabel,
+  Paper,
 } from "@mui/material";
 import { SyncStorageOptions } from "../utils/storage";
 import { getStorageOptions, setStorageOptions } from "../utils/storage";
@@ -24,6 +26,7 @@ const App: React.FC<{}> = () => {
   //const [options, setOptions] = useState<SyncStorageOptions | null>(null);
   const [restTime, setRestTime] = useState<number | null>(0);
   const [focusTime, setFocusTime] = useState<number | null>(0);
+  const [notifications, setNotifications] = useState<boolean>(true);
   const [formState, setFormState] = useState<FormState>("ready");
 
   useEffect(() => {
@@ -52,6 +55,7 @@ const App: React.FC<{}> = () => {
     const options = {
       restTime,
       focusTime,
+      notifications,
     };
     setStorageOptions(options).then(() => {
       setTimeout(() => {
@@ -60,19 +64,30 @@ const App: React.FC<{}> = () => {
     });
   };
 
+  const handleNotificationsChange = () => {
+    setNotifications(!notifications);
+  };
+
   const isFieldDisabled = formState === "saving";
 
   return (
     <Box mx="10%" my="2%">
       <Card>
+        <Typography variant="h4" m={3}>
+          timerXtenstion Options
+        </Typography>
+      </Card>
+      <Card style={{ marginTop: "16px" }}>
         <CardContent>
           <Grid container direction="column" spacing={4}>
             <Grid item>
-              <Typography variant="h4">timerXtenstion Options</Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="body1">Focus Time</Typography>
-              <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+              <Typography variant="body1" ml={3}>
+                Focus Time
+              </Typography>
+              <FormControl
+                sx={{ m: 1, ml: 2, width: "25ch" }}
+                variant="outlined"
+              >
                 <OutlinedInput
                   id="outlined-adornment-weight"
                   endAdornment={
@@ -94,8 +109,13 @@ const App: React.FC<{}> = () => {
               </FormControl>
             </Grid>
             <Grid item>
-              <Typography variant="body1">Rest Time</Typography>
-              <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+              <Typography variant="body1" ml={3}>
+                Rest Time
+              </Typography>
+              <FormControl
+                sx={{ m: 1, ml: 2, width: "25ch" }}
+                variant="outlined"
+              >
                 <OutlinedInput
                   id="outlined-adornment-weight"
                   endAdornment={
@@ -117,14 +137,36 @@ const App: React.FC<{}> = () => {
               </FormControl>
             </Grid>
             <Grid item>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleSaveButtonClick}
-                disabled={isFieldDisabled}
-              >
-                {formState === "ready" ? "Save" : "Saving...."}
-              </Button>
+              <FormControl sx={{ m: 1 }} variant="outlined">
+                <FormControlLabel
+                  control={
+                    <Switch
+                      color="primary"
+                      checked={notifications}
+                      onChange={handleNotificationsChange}
+                    />
+                  }
+                  label="Notifications"
+                  labelPlacement="start"
+                  style={{ width: "25ch" }}
+                />
+                <FormHelperText sx={{ ml: 1 }}>
+                  Chrome notifications have to be enabled in order to receive
+                  notifications
+                </FormHelperText>
+              </FormControl>
+            </Grid>
+            <Grid item>
+              <FormControl sx={{ ml: 3, mt: 2 }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSaveButtonClick}
+                  disabled={isFieldDisabled}
+                >
+                  {formState === "ready" ? "Save" : "Saving...."}
+                </Button>
+              </FormControl>
             </Grid>
           </Grid>
         </CardContent>

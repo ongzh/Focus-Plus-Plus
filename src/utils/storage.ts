@@ -18,6 +18,7 @@ export interface LocalStorageTimerStatus {
 export interface SyncStorageOptions {
   focusTime: number;
   restTime: number;
+  notifications: boolean;
 }
 
 export type LocalStorageKeys = keyof LocalStorage;

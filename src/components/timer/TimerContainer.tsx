@@ -109,6 +109,7 @@ const TimerContainer: React.FC<{}> = () => {
       setFocusing(false);
       setResting(false);
       setTimer(0);
+      setRestTimer(0);
     });
   };
 

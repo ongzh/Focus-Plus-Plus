@@ -14,6 +14,7 @@ chrome.runtime.onInstalled.addListener(() => {
   setStorageOptions({
     focusTime: 25,
     restTime: 5,
+    notifications: true,
   });
   setStoredTimerStatus({
     isFocusing: false,
@@ -73,17 +74,19 @@ chrome.alarms.onAlarm.addListener((alarm) => {
         let restTimer = timerStatus.restTimer;
         let isFocusing = timerStatus.isFocusing;
         let isResting = timerStatus.isResting;
+        let allowNotifications = options.notifications;
 
         if (timerStatus.isFocusing) {
           timer++;
           if (timer >= options.focusTime * 60) {
             isFocusing = false;
             isResting = true;
-
-            registration.showNotification("Time to rest!", {
-              body: `${options.focusTime} minutes has passed! Rest time starts now!`,
-              icon: "icon.png",
-            });
+            if (allowNotifications) {
+              registration.showNotification("Time to rest!", {
+                body: `${options.focusTime} minutes has passed! Rest time starts now!`,
+                icon: "icon.png",
+              });
+            }
           }
           const badgeTime = getTimeLeft(timer, options.focusTime);
           chrome.action.setBadgeText({
@@ -98,11 +101,12 @@ chrome.alarms.onAlarm.addListener((alarm) => {
             restTimer = 0;
             timer = 0;
             isResting = false;
-
-            registration.showNotification("Rest Time is Over!", {
-              body: `${options.restTime} minutes has passed! Start another focus session!`,
-              icon: "icon.png",
-            });
+            if (allowNotifications) {
+              registration.showNotification("Rest Time is Over!", {
+                body: `${options.restTime} minutes has passed! Start another focus session!`,
+                icon: "icon.png",
+              });
+            }
           }
           const badgeTime = getTimeLeft(restTimer, options.restTime);
           chrome.action.setBadgeText({
