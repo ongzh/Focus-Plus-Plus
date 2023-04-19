@@ -31,7 +31,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
   chrome.contextMenus.create({
     contexts: ["page"],
-    title: "Focus++ Menu",
+    title: "focus++ Menu",
     id: "focusMenu",
   });
 

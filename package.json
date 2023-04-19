@@ -1,7 +1,7 @@
 {
-  "name": "chrome-timer-extension",
+  "name": "focus++",
   "version": "2.0.0",
-  "description": "chrome timer extenstion",
+  "description": "chrome timer extenstion to help users focus",
   "scripts": {
     "start": "webpack --watch --progress --config webpack.dev.js",
     "build": "webpack --watch --progress --config webpack.prod.js"

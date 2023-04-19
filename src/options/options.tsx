@@ -74,7 +74,7 @@ const App: React.FC<{}> = () => {
     <Box mx="10%" my="2%">
       <Card>
         <Typography variant="h4" m={3}>
-          timerXtenstion Options
+          focus++ Options
         </Typography>
       </Card>
       <Card style={{ marginTop: "16px" }}>

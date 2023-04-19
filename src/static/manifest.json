@@ -1,6 +1,6 @@
 {
-  "name": "timerXtension",
-  "description": "Chrome Timer Extension",
+  "name": "focus++",
+  "description": "Chrome Extension to help users focus",
   "version": "2.0.0",
   "manifest_version": 3,
   "icons": {
