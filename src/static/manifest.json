@@ -13,11 +13,19 @@
     "default_title": "timerXtension",
     "default_icon": "icon.png"
   },
-  "permissions": ["storage", "alarms", "notifications", "contextMenus"],
+  "permissions": [
+    "declarativeNetRequest",
+    "storage",
+    "alarms",
+    "notifications",
+    "contextMenus"
+  ],
   "options_page": "options.html",
   "background": {
     "service_worker": "background.js"
   },
+  "host_permissions": ["<all_urls>"],
+
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
