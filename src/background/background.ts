@@ -218,28 +218,3 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     });
   }
 });
-
-import RuleActionType = chrome.declarativeNetRequest.RuleActionType;
-import ResourceType = chrome.declarativeNetRequest.ResourceType;
-const adblockRuleID = 2; // give any id to indetify the rule but must be greater than 1
-chrome.declarativeNetRequest.updateDynamicRules(
-  {
-    addRules: [
-      {
-        action: {
-          type: RuleActionType.BLOCK,
-        },
-        condition: {
-          urlFilter: "facebook", // block URLs that starts with this
-          resourceTypes: [ResourceType.MAIN_FRAME], // block only main frame
-        },
-        id: adblockRuleID,
-        priority: 1,
-      },
-    ],
-    removeRuleIds: [adblockRuleID], // this removes old rule if any
-  },
-  () => {
-    console.log("block rule added");
-  }
-);

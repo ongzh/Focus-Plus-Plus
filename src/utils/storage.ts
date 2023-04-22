@@ -8,6 +8,23 @@ export interface SyncStorage {
   taskCompletionCount?: number;
 }
 
+export interface BlockOptions {
+  facebook: boolean;
+  youtube: boolean;
+  twitter: boolean;
+  instagram: boolean;
+  reddit: boolean;
+  tiktok: boolean;
+  whatsapp: boolean;
+  messenger: boolean;
+  telegram: boolean;
+  discord: boolean;
+  twitch: boolean;
+  netflix: boolean;
+  amazon: boolean;
+  disneyplus: boolean;
+}
+
 export interface LocalStorageTimerStatus {
   isFocusing: boolean;
   isResting: boolean;
@@ -23,6 +40,13 @@ export interface SyncStorageOptions {
 
 export type LocalStorageKeys = keyof LocalStorage;
 export type SyncStorageKeys = keyof SyncStorage;
+
+export type SiteInfo = {
+  id: number;
+  url: string;
+};
+
+export type SiteName = "facebook" | "youtube" | "twitter";
 
 export function getStoredTimerStatus(): Promise<LocalStorageTimerStatus> {
   const keys: LocalStorageKeys[] = ["timerStatus"];
