@@ -1,3 +1,5 @@
+import { SiteName } from "./block";
+
 export interface LocalStorage {
   timerStatus: LocalStorageTimerStatus;
 }
@@ -6,9 +8,10 @@ export interface SyncStorage {
   options?: SyncStorageOptions;
   tasks?: string[];
   taskCompletionCount?: number;
+  blockOptions?: BlockOptions;
 }
 
-export interface BlockOptions {
+export type BlockOptions = {
   facebook: boolean;
   youtube: boolean;
   twitter: boolean;
@@ -23,7 +26,7 @@ export interface BlockOptions {
   netflix: boolean;
   amazon: boolean;
   disneyplus: boolean;
-}
+};
 
 export interface LocalStorageTimerStatus {
   isFocusing: boolean;
@@ -40,13 +43,7 @@ export interface SyncStorageOptions {
 
 export type LocalStorageKeys = keyof LocalStorage;
 export type SyncStorageKeys = keyof SyncStorage;
-
-export type SiteInfo = {
-  id: number;
-  url: string;
-};
-
-export type SiteName = "facebook" | "youtube" | "twitter";
+export type BlockOptionsKeys = keyof BlockOptions;
 
 export function getStoredTimerStatus(): Promise<LocalStorageTimerStatus> {
   const keys: LocalStorageKeys[] = ["timerStatus"];
@@ -124,6 +121,28 @@ export function getStoredTaskCompletionCount(): Promise<number> {
 export function setStoredCompletedTaskCount(count: number): Promise<void> {
   const vals: SyncStorage = {
     taskCompletionCount: count,
+  };
+  return new Promise((resolve) => {
+    chrome.storage.sync.set(vals, () => {
+      resolve();
+    });
+  });
+}
+
+export function getStoredBlockOptions(): Promise<BlockOptions> {
+  const keys: SyncStorageKeys[] = ["blockOptions"];
+  return new Promise((resolve) => {
+    chrome.storage.sync.get(keys, (res: SyncStorage) => {
+      resolve(res.blockOptions);
+    });
+  });
+}
+
+export function setStoredBlockOptions(
+  blockOptions: BlockOptions
+): Promise<void> {
+  const vals: SyncStorage = {
+    blockOptions,
   };
   return new Promise((resolve) => {
     chrome.storage.sync.set(vals, () => {

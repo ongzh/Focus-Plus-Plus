@@ -7,9 +7,10 @@ import {
   setStoredTimerStatus,
   setStoredTasks,
   setStoredCompletedTaskCount,
+  setStoredBlockOptions,
 } from "../utils/storage";
 import { getTimeLeft } from "../utils/time";
-
+import { defaultBlockOptions } from "../utils/block";
 chrome.runtime.onInstalled.addListener(() => {
   setStorageOptions({
     focusTime: 25,
@@ -24,6 +25,7 @@ chrome.runtime.onInstalled.addListener(() => {
   });
   setStoredTasks([]);
   setStoredCompletedTaskCount(0);
+  setStoredBlockOptions(defaultBlockOptions);
 
   chrome.alarms.create("focusTimer", {
     periodInMinutes: 1 / 60,
