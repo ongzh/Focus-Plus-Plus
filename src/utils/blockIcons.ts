@@ -14,7 +14,7 @@ import {
 } from "react-icons/fa";
 import { TbBrandNetflix, TbBrandDisney } from "react-icons/tb";
 
-export const blockIcons = {
+export const BlockIcons = {
   facebook: FaFacebook,
   twitter: FaTwitter,
   instagram: FaInstagram,

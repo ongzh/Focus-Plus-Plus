@@ -20,6 +20,7 @@ import {
 } from "@mui/material";
 import { SyncStorageOptions } from "../utils/storage";
 import { getStorageOptions, setStorageOptions } from "../utils/storage";
+import { SiteBlockOptions } from "./SiteBlockOptions";
 type FormState = "ready" | "saving";
 
 const App: React.FC<{}> = () => {
@@ -171,6 +172,7 @@ const App: React.FC<{}> = () => {
           </Grid>
         </CardContent>
       </Card>
+      <Box></Box>
     </Box>
   );
 };

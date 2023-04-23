@@ -9,13 +9,14 @@ import {
 import React, { useState, useEffect } from "react";
 import { SiteName } from "../utils/block";
 import { FaFacebookSquare } from "react-icons/fa";
-import { IconType } from "react-icons";
+import { BlockIcons } from "../utils/blockIcons";
+import { BlockOptions } from "../utils/storage";
+
 const SiteToggle: React.FC<{
   siteName: SiteName;
-  siteBlocked: boolean;
-  siteIcon: IconType;
+  isSiteBlocked: boolean;
   handleBlockOption: (siteName: SiteName) => void;
-}> = ({ siteName, siteIcon, siteBlocked, handleBlockOption }) => {
+}> = ({ siteName, isSiteBlocked, handleBlockOption }) => {
   return (
     <Grid item>
       <FormControl sx={{ m: 1 }} variant="outlined">
@@ -23,25 +24,37 @@ const SiteToggle: React.FC<{
           control={
             <Switch
               color="primary"
-              checked={siteBlocked}
+              checked={isSiteBlocked}
               onChange={() => {
                 handleBlockOption(siteName);
               }}
+              inputProps={{ "aria-label": "toggle block " + siteName }}
             />
           }
-          label="Notifications"
+          label={BlockIcons[siteName]}
           labelPlacement="start"
           style={{ width: "25ch" }}
         />
-        <FormHelperText sx={{ ml: 1 }}>
-          Chrome notifications have to be enabled in order to receive
-          notifications
-        </FormHelperText>
       </FormControl>
     </Grid>
   );
 };
 
-const SiteBlockOptions: React.FC<{}> = ({}) => {
-  return <Box></Box>;
+const SiteBlockOptions: React.FC<{
+  handleBlockOption: (siteName: SiteName) => void;
+  blockOptions: BlockOptions;
+}> = ({ handleBlockOption, blockOptions }) => {
+  return (
+    <Box>
+      {Object.keys(blockOptions).map((siteName) => {
+        return (
+          <SiteToggle
+            siteName={siteName as SiteName}
+            isSiteBlocked={blockOptions[siteName as SiteName]}
+            handleBlockOption={handleBlockOption}
+          />
+        );
+      })}
+    </Box>
+  );
 };
