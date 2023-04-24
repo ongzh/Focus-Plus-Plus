@@ -30,3 +30,5 @@ export const BlockIcons = {
   reddit: FaReddit,
   messenger: FaFacebookMessenger,
 };
+
+export type BlockIconsKeys = keyof typeof BlockIcons;

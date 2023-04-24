@@ -18,9 +18,14 @@ import {
   FormControlLabel,
   Paper,
 } from "@mui/material";
-import { SyncStorageOptions } from "../utils/storage";
+import {
+  BlockOptions,
+  SyncStorageOptions,
+  getStoredBlockOptions,
+} from "../utils/storage";
 import { getStorageOptions, setStorageOptions } from "../utils/storage";
 import { SiteBlockOptions } from "./SiteBlockOptions";
+import { SiteName, defaultBlockOptions } from "../utils/block";
 type FormState = "ready" | "saving";
 
 const App: React.FC<{}> = () => {
@@ -29,11 +34,20 @@ const App: React.FC<{}> = () => {
   const [focusTime, setFocusTime] = useState<number | null>(0);
   const [notifications, setNotifications] = useState<boolean>(true);
   const [formState, setFormState] = useState<FormState>("ready");
+  const [initialBlockOptions, setInitialBlockOptions] =
+    useState<BlockOptions>(defaultBlockOptions);
+  const [blockOptions, setBlockOptions] =
+    useState<BlockOptions>(defaultBlockOptions);
 
   useEffect(() => {
     getStorageOptions().then((options) => {
       setRestTime(options.restTime);
       setFocusTime(options.focusTime);
+    });
+    getStoredBlockOptions().then((blockOptions) => {
+      setInitialBlockOptions(blockOptions);
+      setBlockOptions(blockOptions);
+      console.log(blockOptions);
     });
   }, []);
 
@@ -67,6 +81,12 @@ const App: React.FC<{}> = () => {
 
   const handleNotificationsChange = () => {
     setNotifications(!notifications);
+  };
+
+  const handleBlockOptionChange = (siteName: SiteName) => {
+    const newBlockOptions = { ...blockOptions };
+    newBlockOptions[siteName] = !newBlockOptions[siteName];
+    setBlockOptions(newBlockOptions);
   };
 
   const isFieldDisabled = formState === "saving";
@@ -172,7 +192,10 @@ const App: React.FC<{}> = () => {
           </Grid>
         </CardContent>
       </Card>
-      <Box></Box>
+      <SiteBlockOptions
+        handleBlockOptionChange={handleBlockOptionChange}
+        blockOptions={blockOptions}
+      ></SiteBlockOptions>
     </Box>
   );
 };

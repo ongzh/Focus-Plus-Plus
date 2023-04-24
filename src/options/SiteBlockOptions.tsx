@@ -8,15 +8,15 @@ import {
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { SiteName } from "../utils/block";
-import { FaFacebookSquare } from "react-icons/fa";
 import { BlockIcons } from "../utils/blockIcons";
 import { BlockOptions } from "../utils/storage";
 
 const SiteToggle: React.FC<{
   siteName: SiteName;
   isSiteBlocked: boolean;
-  handleBlockOption: (siteName: SiteName) => void;
-}> = ({ siteName, isSiteBlocked, handleBlockOption }) => {
+  handleBlockOptionChange: (siteName: SiteName) => void;
+}> = ({ siteName, isSiteBlocked, handleBlockOptionChange }) => {
+  const BlockIcon = BlockIcons[siteName] as React.FC;
   return (
     <Grid item>
       <FormControl sx={{ m: 1 }} variant="outlined">
@@ -26,12 +26,12 @@ const SiteToggle: React.FC<{
               color="primary"
               checked={isSiteBlocked}
               onChange={() => {
-                handleBlockOption(siteName);
+                handleBlockOptionChange(siteName);
               }}
               inputProps={{ "aria-label": "toggle block " + siteName }}
             />
           }
-          label={BlockIcons[siteName]}
+          label={<BlockIcon />}
           labelPlacement="start"
           style={{ width: "25ch" }}
         />
@@ -40,19 +40,20 @@ const SiteToggle: React.FC<{
   );
 };
 
-const SiteBlockOptions: React.FC<{
-  handleBlockOption: (siteName: SiteName) => void;
+export const SiteBlockOptions: React.FC<{
+  handleBlockOptionChange: (siteName: SiteName) => void;
   blockOptions: BlockOptions;
-}> = ({ handleBlockOption, blockOptions }) => {
+}> = ({ handleBlockOptionChange, blockOptions }) => {
   return (
     <Box>
       {Object.keys(blockOptions).map((siteName) => {
         return (
           <SiteToggle
+            key={siteName}
             siteName={siteName as SiteName}
             isSiteBlocked={blockOptions[siteName as SiteName]}
-            handleBlockOption={handleBlockOption}
-          />
+            handleBlockOptionChange={handleBlockOptionChange}
+          ></SiteToggle>
         );
       })}
     </Box>
