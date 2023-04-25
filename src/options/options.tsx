@@ -22,10 +22,15 @@ import {
   BlockOptions,
   SyncStorageOptions,
   getStoredBlockOptions,
+  setStoredBlockOptions,
 } from "../utils/storage";
 import { getStorageOptions, setStorageOptions } from "../utils/storage";
 import { SiteBlockOptions } from "./SiteBlockOptions";
-import { SiteName, defaultBlockOptions } from "../utils/block";
+import {
+  SiteName,
+  defaultBlockOptions,
+  updateBlockOptions,
+} from "../utils/block";
 type FormState = "ready" | "saving";
 
 const App: React.FC<{}> = () => {
@@ -72,10 +77,13 @@ const App: React.FC<{}> = () => {
       focusTime,
       notifications,
     };
-    setStorageOptions(options).then(() => {
-      setTimeout(() => {
-        setFormState("ready");
-      }, 1000);
+    updateBlockOptions(initialBlockOptions, blockOptions);
+    setStoredBlockOptions(blockOptions).then(() => {
+      setStorageOptions(options).then(() => {
+        setTimeout(() => {
+          setFormState("ready");
+        }, 1000);
+      });
     });
   };
 

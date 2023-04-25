@@ -99,7 +99,22 @@ const blockedSites: Record<SiteName, SiteInfo> = {
   },
 };
 
-export function addBlockedSite(site: SiteName) {
+export function updateBlockOptions(
+  prevOptions: BlockOptions,
+  newOptions: BlockOptions
+) {
+  for (const site of Object.keys(newOptions) as SiteName[]) {
+    if (prevOptions[site] !== newOptions[site]) {
+      if (newOptions[site]) {
+        addBlockedSite(site);
+      } else {
+        removeBlockedSite(site);
+      }
+    }
+  }
+}
+
+function addBlockedSite(site: SiteName) {
   const siteInfo = blockedSites[site];
   chrome.declarativeNetRequest.updateDynamicRules(
     {
@@ -124,7 +139,7 @@ export function addBlockedSite(site: SiteName) {
   );
 }
 
-export function removeBlockedSite(site: SiteName) {
+function removeBlockedSite(site: SiteName) {
   const siteInfo = blockedSites[site];
   chrome.declarativeNetRequest.updateDynamicRules(
     {
