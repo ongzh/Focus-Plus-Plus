@@ -79,6 +79,7 @@ const App: React.FC<{}> = () => {
     };
     updateBlockOptions(initialBlockOptions, blockOptions);
     setStoredBlockOptions(blockOptions).then(() => {
+      setInitialBlockOptions(blockOptions);
       setStorageOptions(options).then(() => {
         setTimeout(() => {
           setFormState("ready");

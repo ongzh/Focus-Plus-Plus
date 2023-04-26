@@ -134,6 +134,9 @@ function addBlockedSite(site: SiteName) {
       removeRuleIds: [siteInfo.id], // this removes old rule if any
     },
     () => {
+      chrome.declarativeNetRequest.getDynamicRules((rules) => {
+        console.log(rules);
+      });
       console.log("block " + siteInfo.url + " rule added");
     }
   );
@@ -141,11 +144,15 @@ function addBlockedSite(site: SiteName) {
 
 function removeBlockedSite(site: SiteName) {
   const siteInfo = blockedSites[site];
+
   chrome.declarativeNetRequest.updateDynamicRules(
     {
       removeRuleIds: [siteInfo.id], //invalid and non-existing rules will be ignored
     },
     () => {
+      chrome.declarativeNetRequest.getDynamicRules((rules) => {
+        console.log(rules);
+      });
       console.log("block " + siteInfo.url + " rule removed");
     }
   );
