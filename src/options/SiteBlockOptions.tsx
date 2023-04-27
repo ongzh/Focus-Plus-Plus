@@ -4,7 +4,14 @@ import {
   FormControlLabel,
   FormHelperText,
   Grid,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader,
+  Paper,
   Switch,
+  Typography,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { SiteName } from "../utils/block";
@@ -18,25 +25,20 @@ const SiteToggle: React.FC<{
 }> = ({ siteName, isSiteBlocked, handleBlockOptionChange }) => {
   const BlockIcon = BlockIcons[siteName] as React.FC;
   return (
-    <Grid item>
-      <FormControl sx={{ m: 1 }} variant="outlined">
-        <FormControlLabel
-          control={
-            <Switch
-              color="primary"
-              checked={isSiteBlocked}
-              onChange={() => {
-                handleBlockOptionChange(siteName);
-              }}
-              inputProps={{ "aria-label": "toggle block " + siteName }}
-            />
-          }
-          label={<BlockIcon />}
-          labelPlacement="start"
-          style={{ width: "25ch" }}
-        />
-      </FormControl>
-    </Grid>
+    <ListItem>
+      <ListItemIcon>
+        <BlockIcon />
+      </ListItemIcon>
+      <ListItemText primary={siteName} />
+      <Switch
+        edge="end"
+        checked={isSiteBlocked}
+        onChange={() => {
+          handleBlockOptionChange(siteName);
+        }}
+        inputProps={{ "aria-label": "toggle-block-" + siteName }}
+      />
+    </ListItem>
   );
 };
 
@@ -45,17 +47,30 @@ export const SiteBlockOptions: React.FC<{
   blockOptions: BlockOptions;
 }> = ({ handleBlockOptionChange, blockOptions }) => {
   return (
-    <Box>
-      {Object.keys(blockOptions).map((siteName) => {
-        return (
-          <SiteToggle
-            key={siteName}
-            siteName={siteName as SiteName}
-            isSiteBlocked={blockOptions[siteName as SiteName]}
-            handleBlockOptionChange={handleBlockOptionChange}
-          ></SiteToggle>
-        );
-      })}
-    </Box>
+    <Paper>
+      <List
+        sx={{
+          width: "100%",
+          maxWidth: 360,
+          maxHeight: 360,
+          bgcolor: "background.paper",
+          overflow: "auto",
+        }}
+        subheader={
+          <ListSubheader>Block Distractions (only in focus)</ListSubheader>
+        }
+      >
+        {Object.keys(blockOptions).map((siteName) => {
+          return (
+            <SiteToggle
+              key={siteName}
+              siteName={siteName as SiteName}
+              isSiteBlocked={blockOptions[siteName as SiteName]}
+              handleBlockOptionChange={handleBlockOptionChange}
+            ></SiteToggle>
+          );
+        })}
+      </List>
+    </Paper>
   );
 };
