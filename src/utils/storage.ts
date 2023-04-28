@@ -1,4 +1,4 @@
-import { SiteName } from "./block";
+import { SiteName, defaultBlockOptions, resetBlockRules } from "./block";
 
 export interface LocalStorage {
   timerStatus: LocalStorageTimerStatus;
@@ -147,6 +147,18 @@ export function setStoredBlockOptions(
   return new Promise((resolve) => {
     chrome.storage.sync.set(vals, () => {
       resolve();
+    });
+  });
+}
+
+export function resetStoredBlockOptions(): Promise<void> {
+  const vals: SyncStorage = {
+    blockOptions: defaultBlockOptions,
+  };
+  return new Promise((resolve) => {
+    chrome.storage.sync.set(vals, () => {
+      resolve();
+      resetBlockRules();
     });
   });
 }

@@ -114,6 +114,17 @@ export function updateBlockOptions(
   }
 }
 
+export function resetBlockRules() {
+  chrome.declarativeNetRequest.updateDynamicRules(
+    {
+      removeRuleIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], //invalid and non-existing rules will be ignored
+    },
+    () => {
+      console.log("all rules removed");
+    }
+  );
+}
+
 function addBlockedSite(site: SiteName) {
   const siteInfo = blockedSites[site];
   chrome.declarativeNetRequest.updateDynamicRules(

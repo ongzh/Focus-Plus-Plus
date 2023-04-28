@@ -18,6 +18,7 @@ import { SiteName } from "../utils/block";
 import { BlockIcons } from "../utils/blockIcons";
 import { BlockOptions } from "../utils/storage";
 import "./options.css";
+
 const SiteToggle: React.FC<{
   siteName: SiteName;
   isSiteBlocked: boolean;
