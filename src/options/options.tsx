@@ -17,6 +17,7 @@ import {
   useAutocomplete,
   FormControlLabel,
   Paper,
+  Divider,
 } from "@mui/material";
 import {
   BlockOptions,
@@ -31,8 +32,9 @@ import {
   defaultBlockOptions,
   updateBlockOptions,
 } from "../utils/block";
-type FormState = "ready" | "saving";
+import { BasicOptions } from "./BasicOptions";
 
+export type FormState = "ready" | "saving";
 const App: React.FC<{}> = () => {
   //const [options, setOptions] = useState<SyncStorageOptions | null>(null);
   const [restTime, setRestTime] = useState<number | null>(0);
@@ -98,113 +100,38 @@ const App: React.FC<{}> = () => {
     setBlockOptions(newBlockOptions);
   };
 
-  const isFieldDisabled = formState === "saving";
-
   return (
     <Box mx="10%" my="2%">
-      <Card>
-        <Typography variant="h4" m={3}>
+      <Card style={{ marginTop: "16px", padding: "88px", paddingTop: "24px" }}>
+        <Typography variant="h4" m={3} textAlign={"center"} pb={5}>
           focus++ Options
         </Typography>
-      </Card>
-      <Card style={{ marginTop: "16px" }}>
         <CardContent>
-          <Grid container direction="column" spacing={4}>
-            <Grid item>
-              <Typography variant="body1" ml={3}>
-                Focus Time
-              </Typography>
-              <FormControl
-                sx={{ m: 1, ml: 2, width: "25ch" }}
-                variant="outlined"
-              >
-                <OutlinedInput
-                  id="outlined-adornment-weight"
-                  endAdornment={
-                    <InputAdornment position="end">minutes</InputAdornment>
-                  }
-                  aria-describedby="outlined-weight-helper-text"
-                  inputProps={{
-                    "aria-label": "weight",
-                  }}
-                  type="number"
-                  onChange={(e) =>
-                    handleFocusTimeChange(e.target.value as unknown as number)
-                  }
-                  value={focusTime}
-                />
-                <FormHelperText id="outlined-weight-helper-text">
-                  0 - 60 mins
-                </FormHelperText>
-              </FormControl>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <BasicOptions
+                focusTime={focusTime}
+                restTime={restTime}
+                notifications={notifications}
+                handleFocusTimeChange={handleFocusTimeChange}
+                handleRestTimerChange={handleRestTimerChange}
+                handleNotificationsChange={handleNotificationsChange}
+                handleSaveButtonClick={handleSaveButtonClick}
+                formState={formState}
+              ></BasicOptions>
             </Grid>
-            <Grid item>
-              <Typography variant="body1" ml={3}>
-                Rest Time
-              </Typography>
-              <FormControl
-                sx={{ m: 1, ml: 2, width: "25ch" }}
-                variant="outlined"
-              >
-                <OutlinedInput
-                  id="outlined-adornment-weight"
-                  endAdornment={
-                    <InputAdornment position="end">minutes</InputAdornment>
-                  }
-                  aria-describedby="outlined-weight-helper-text"
-                  type="number"
-                  inputProps={{
-                    "aria-label": "weight",
-                  }}
-                  onChange={(e) =>
-                    handleRestTimerChange(e.target.value as unknown as number)
-                  }
-                  value={restTime}
-                />
-                <FormHelperText id="outlined-weight-helper-text">
-                  0 - 60 mins
-                </FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item>
-              <FormControl sx={{ m: 1 }} variant="outlined">
-                <FormControlLabel
-                  control={
-                    <Switch
-                      color="primary"
-                      checked={notifications}
-                      onChange={handleNotificationsChange}
-                    />
-                  }
-                  label="Notifications"
-                  labelPlacement="start"
-                  style={{ width: "25ch" }}
-                />
-                <FormHelperText sx={{ ml: 1 }}>
-                  Chrome notifications have to be enabled in order to receive
-                  notifications
-                </FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item>
-              <FormControl sx={{ ml: 3, mt: 2 }}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleSaveButtonClick}
-                  disabled={isFieldDisabled}
-                >
-                  {formState === "ready" ? "Save" : "Saving...."}
-                </Button>
-              </FormControl>
+
+            <Divider orientation="vertical" flexItem sx={{ mr: "-1px" }} />
+
+            <Grid item xs={12} sm={6}>
+              <SiteBlockOptions
+                handleBlockOptionChange={handleBlockOptionChange}
+                blockOptions={blockOptions}
+              ></SiteBlockOptions>
             </Grid>
           </Grid>
         </CardContent>
       </Card>
-      <SiteBlockOptions
-        handleBlockOptionChange={handleBlockOptionChange}
-        blockOptions={blockOptions}
-      ></SiteBlockOptions>
     </Box>
   );
 };

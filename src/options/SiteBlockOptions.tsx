@@ -17,7 +17,7 @@ import React, { useState, useEffect } from "react";
 import { SiteName } from "../utils/block";
 import { BlockIcons } from "../utils/blockIcons";
 import { BlockOptions } from "../utils/storage";
-
+import "./options.css";
 const SiteToggle: React.FC<{
   siteName: SiteName;
   isSiteBlocked: boolean;
@@ -26,10 +26,10 @@ const SiteToggle: React.FC<{
   const BlockIcon = BlockIcons[siteName] as React.FC;
   return (
     <ListItem>
-      <ListItemIcon>
+      <ListItemIcon style={{ color: "#2196f3" }}>
         <BlockIcon />
       </ListItemIcon>
-      <ListItemText primary={siteName} />
+      <ListItemText id="block-list-header" primary={siteName} />
       <Switch
         edge="end"
         checked={isSiteBlocked}
@@ -47,12 +47,10 @@ export const SiteBlockOptions: React.FC<{
   blockOptions: BlockOptions;
 }> = ({ handleBlockOptionChange, blockOptions }) => {
   return (
-    <Paper>
+    <Paper style={{ height: "100%" }} variant="elevation" elevation={0}>
       <List
         sx={{
-          width: "100%",
-          maxWidth: 360,
-          maxHeight: 360,
+          maxHeight: 400,
           bgcolor: "background.paper",
           overflow: "auto",
         }}
