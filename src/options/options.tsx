@@ -79,7 +79,6 @@ const App: React.FC<{}> = () => {
       focusTime,
       notifications,
     };
-    updateBlockOptions(initialBlockOptions, blockOptions);
     setStoredBlockOptions(blockOptions).then(() => {
       setInitialBlockOptions(blockOptions);
       setStorageOptions(options).then(() => {

@@ -10,7 +10,7 @@ import {
   setStoredBlockOptions,
 } from "../utils/storage";
 import { getTimeLeft } from "../utils/time";
-import { defaultBlockOptions } from "../utils/block";
+import { defaultBlockOptions, resetBlockRules } from "../utils/block";
 chrome.runtime.onInstalled.addListener(() => {
   setStorageOptions({
     focusTime: 25,
@@ -88,6 +88,8 @@ chrome.alarms.onAlarm.addListener((alarm) => {
                 body: `${options.focusTime} minutes has passed! Rest time starts now!`,
                 icon: "icon.png",
               });
+              //remove the block rules
+              resetBlockRules();
             }
           }
           const badgeTime = getTimeLeft(timer, options.focusTime);

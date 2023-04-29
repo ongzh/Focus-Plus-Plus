@@ -11,6 +11,7 @@ import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
 import SkipNextRoundedIcon from "@mui/icons-material/SkipNextRounded";
 import RestartAltRoundedIcon from "@mui/icons-material/RestartAltRounded";
+import { activateBlockRules, resetBlockRules } from "../../utils/block";
 
 const TimerContainer: React.FC<{}> = () => {
   const [timer, setTimer] = useState<number>(0);
@@ -72,7 +73,13 @@ const TimerContainer: React.FC<{}> = () => {
   }, [focusTime, restTime]);
 
   const handleStartButtonClick = () => {
+    if (timer === 0 && restTimer === 0) {
+      activateBlockRules();
+      console.log("activate rules");
+    }
+
     if (isFocusing || isResting) {
+      //when timer is running
       setStoredTimerStatus({
         timer,
         restTimer,
@@ -83,6 +90,7 @@ const TimerContainer: React.FC<{}> = () => {
         setResting(false);
       });
     } else if (focusTime * 60 <= timer) {
+      //timer is paused but in rest
       setStoredTimerStatus({
         timer,
         restTimer,
@@ -91,6 +99,7 @@ const TimerContainer: React.FC<{}> = () => {
       }).then(() => setResting(true));
     } else {
       setStoredTimerStatus({
+        //timer is paused but in focus
         timer,
         restTimer,
         isFocusing: true,
@@ -111,6 +120,7 @@ const TimerContainer: React.FC<{}> = () => {
       setTimer(0);
       setRestTimer(0);
     });
+    resetBlockRules();
   };
 
   const handleEndButtonClick = () => {

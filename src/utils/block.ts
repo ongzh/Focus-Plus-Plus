@@ -1,4 +1,4 @@
-import { BlockOptions } from "./storage";
+import { BlockOptions, getStoredBlockOptions } from "./storage";
 import RuleActionType = chrome.declarativeNetRequest.RuleActionType;
 import ResourceType = chrome.declarativeNetRequest.ResourceType;
 
@@ -112,6 +112,18 @@ export function updateBlockOptions(
       }
     }
   }
+}
+
+export function activateBlockRules() {
+  getStoredBlockOptions().then((blockOptions) => {
+    for (const site of Object.keys(blockOptions) as SiteName[]) {
+      if (blockOptions[site]) {
+        addBlockedSite(site);
+      } else {
+        removeBlockedSite(site);
+      }
+    }
+  });
 }
 
 export function resetBlockRules() {
