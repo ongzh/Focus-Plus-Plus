@@ -56,7 +56,7 @@ export const SiteBlockOptions: React.FC<{
           overflow: "auto",
         }}
         subheader={
-          <ListSubheader>Block Distractions (only in focus)</ListSubheader>
+          <ListSubheader>Block Distractions (only in focus mode)</ListSubheader>
         }
       >
         {Object.keys(blockOptions).map((siteName) => {

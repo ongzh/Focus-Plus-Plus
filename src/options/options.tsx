@@ -18,6 +18,7 @@ import {
   FormControlLabel,
   Paper,
   Divider,
+  IconButton,
 } from "@mui/material";
 import {
   BlockOptions,
@@ -33,6 +34,7 @@ import {
   updateBlockOptions,
 } from "../utils/block";
 import { BasicOptions } from "./BasicOptions";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 export type FormState = "ready" | "saving";
 const App: React.FC<{}> = () => {
@@ -72,6 +74,15 @@ const App: React.FC<{}> = () => {
     setRestTime(restTime);
   };
 
+  const handleResetOptionsButtonClick = () => {
+    setFormState("ready");
+    setFocusTime(25);
+    setRestTime(5);
+    setNotifications(true);
+    setInitialBlockOptions(defaultBlockOptions);
+    setBlockOptions(defaultBlockOptions);
+  };
+
   const handleSaveButtonClick = () => {
     setFormState("saving");
     const options = {
@@ -102,9 +113,18 @@ const App: React.FC<{}> = () => {
   return (
     <Box mx="10%" my="2%">
       <Card style={{ marginTop: "16px", padding: "88px", paddingTop: "24px" }}>
-        <Typography variant="h4" m={3} textAlign={"center"} pb={5}>
-          focus++ Options
+        <Typography variant="h4" m={3} textAlign={"center"} mb={0}>
+          Focus++ Options
         </Typography>
+        <Box sx={{ display: "flex", justifyContent: "end" }}>
+          <IconButton>
+            <RestartAltIcon
+              aria-label="reset-options"
+              onClick={handleResetOptionsButtonClick}
+              color="primary"
+            />
+          </IconButton>
+        </Box>
         <CardContent>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
