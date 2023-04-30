@@ -62,9 +62,8 @@ export const BasicOptions: React.FC<{
               endAdornment={
                 <InputAdornment position="end">minutes</InputAdornment>
               }
-              aria-describedby="outlined-weight-helper-text"
               inputProps={{
-                "aria-label": "weight",
+                "aria-label": "focus-time-minutes",
               }}
               type="number"
               onChange={(e) =>
@@ -72,9 +71,7 @@ export const BasicOptions: React.FC<{
               }
               value={focusTime}
             />
-            <FormHelperText id="outlined-weight-helper-text">
-              0 - 60 mins
-            </FormHelperText>
+            <FormHelperText>0 - 60 mins</FormHelperText>
           </FormControl>
           /
         </Grid>
@@ -87,23 +84,19 @@ export const BasicOptions: React.FC<{
         <Grid item xs={12} md={6}>
           <FormControl sx={{ m: 1, ml: 2, width: "25ch" }} variant="outlined">
             <OutlinedInput
-              id="outlined-adornment-weight"
               endAdornment={
                 <InputAdornment position="end">minutes</InputAdornment>
               }
-              aria-describedby="outlined-weight-helper-text"
               type="number"
               inputProps={{
-                "aria-label": "weight",
+                "aria-label": "break-time-minutes",
               }}
               onChange={(e) =>
                 handleRestTimerChange(e.target.value as unknown as number)
               }
               value={restTime}
             />
-            <FormHelperText id="outlined-weight-helper-text">
-              0 - 60 mins
-            </FormHelperText>
+            <FormHelperText>0 - 60 mins</FormHelperText>
           </FormControl>
         </Grid>
         <Grid item xs={12} md={6}>

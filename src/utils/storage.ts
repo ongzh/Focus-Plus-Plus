@@ -1,4 +1,4 @@
-import { SiteName, defaultBlockOptions, resetBlockRules } from "./block";
+import { SiteName, resetBlockRules } from "./block";
 
 export interface LocalStorage {
   timerStatus: LocalStorageTimerStatus;
@@ -10,6 +10,23 @@ export interface SyncStorage {
   taskCompletionCount?: number;
   blockOptions?: BlockOptions;
 }
+
+export const defaultBlockOptions: BlockOptions = {
+  facebook: false,
+  youtube: false,
+  twitter: false,
+  instagram: false,
+  reddit: false,
+  tiktok: false,
+  whatsapp: false,
+  messenger: false,
+  telegram: false,
+  discord: false,
+  twitch: false,
+  netflix: false,
+  amazon: false,
+  disneyplus: false,
+};
 
 export type BlockOptions = {
   facebook: boolean;

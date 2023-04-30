@@ -25,14 +25,11 @@ import {
   SyncStorageOptions,
   getStoredBlockOptions,
   setStoredBlockOptions,
+  defaultBlockOptions,
 } from "../utils/storage";
 import { getStorageOptions, setStorageOptions } from "../utils/storage";
 import { SiteBlockOptions } from "./SiteBlockOptions";
-import {
-  SiteName,
-  defaultBlockOptions,
-  updateBlockOptions,
-} from "../utils/block";
+import { SiteName, updateBlockOptions } from "../utils/block";
 import { BasicOptions } from "./BasicOptions";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 

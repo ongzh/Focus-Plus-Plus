@@ -23,23 +23,6 @@ export type SiteName =
   | "amazon"
   | "disneyplus";
 
-export const defaultBlockOptions: BlockOptions = {
-  facebook: false,
-  youtube: false,
-  twitter: false,
-  instagram: false,
-  reddit: false,
-  tiktok: false,
-  whatsapp: false,
-  messenger: false,
-  telegram: false,
-  discord: false,
-  twitch: false,
-  netflix: false,
-  amazon: false,
-  disneyplus: false,
-};
-
 const blockedSites: Record<SiteName, SiteInfo> = {
   facebook: {
     id: 1,
@@ -157,10 +140,12 @@ function addBlockedSite(site: SiteName) {
       removeRuleIds: [siteInfo.id], // this removes old rule if any
     },
     () => {
+      /*
       chrome.declarativeNetRequest.getDynamicRules((rules) => {
         console.log(rules);
       });
       console.log("block " + siteInfo.url + " rule added");
+      */
     }
   );
 }
@@ -173,10 +158,12 @@ function removeBlockedSite(site: SiteName) {
       removeRuleIds: [siteInfo.id], //invalid and non-existing rules will be ignored
     },
     () => {
+      /*
       chrome.declarativeNetRequest.getDynamicRules((rules) => {
         console.log(rules);
       });
       console.log("block " + siteInfo.url + " rule removed");
+    */
     }
   );
 }
