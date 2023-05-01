@@ -1,22 +1,23 @@
-# timerXtension-v2
+# Focus ++
 
-Chrome timer extenstion build using React, Typescript, MUI.
+Productivity Chrome Extension built using React, Typescript, MUI.
+<br>
+Distracted by social media? Losing focus in your work sessions? Want to keep track of your tasks for the day? This extension will remove distractions and help you get things done!
 
-## Getting Started
+## Functionality
 
-1. `npm i` to install dependancies
-2. `npm start` to start running the fast development mode Webpack build process that bundle files into the `dist` folder
-3. `npm i --save-dev <package_name>` to install new packages
+- Built in Pomodor Timer sessions
+- Customise your focus and break time intervals (right click options)
+- Create a task list to keep track of tasks to complete in your day
+- Track the number of tasks you've completed
+- Block up to 14 different social media and streaming sites while you're focusing!
+- Get notified when your focus/rest time ends and start a new session!
+  <br>
 
-## Loading The Chrome Extension
+## Test it out?
 
-1. Open Chrome and navigate to `chrome://extensions/`
-2. Toggle on `Developer mode` in the top right corner
-3. Click `Load unpacked`
-4. Select the entire `dist` folder
-
-# Production Build
-
-1. `npm run build` to generate a minimized production build in the `dist` folder
-2. ZIP the entire `dist` folder (e.g. `dist.zip`)
-3. Publish the ZIP file on the Chrome Web Store Developer Dashboard!
+- Clone this repository into local directory
+- Navigate to chrome://extensions on your local chrome browser
+- Enable Developer mode
+- Click on load unpacked and select the folder you cloned.
+- Turn on chrome notifications for notifications to work properly (optional)
