@@ -5,21 +5,6 @@ Productivity Chrome Extension built using React, Typescript, MUI.
 Distracted by social media? Losing focus in your work sessions? Want to keep track of your tasks for the day? This extension will remove distractions and help you get things done!
 <br>
 
-## Preview
-
-Extension PopUp
-<br>
-<img src="focus-home-demo.jpg" width="600">
-<br>
-Options Page
-<br>
-<img src="focus-options-demo.jpg" width="600">
-<br>
-Notification
-<br>
-<img src="focus-noti-demo.jpg">
-<br>
-
 ## Functionality
 
 - Built in Pomodor Timer sessions
@@ -29,6 +14,21 @@ Notification
 - Block up to 14 different social media and streaming sites while you're focusing!
 - Get notified when your focus/rest time ends and start a new session!
   <br>
+
+## Preview
+
+Extension PopUp
+<br>
+<img src="preview/focus-home-demo.jpg" width="600">
+<br>
+Options Page
+<br>
+<img src="preview/focus-options-demo.jpg" width="600">
+<br>
+Notification
+<br>
+<img src="preview/focus-noti-demo.jpg">
+<br>
 
 ## Test it out?
 
