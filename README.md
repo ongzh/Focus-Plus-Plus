@@ -3,6 +3,22 @@
 Productivity Chrome Extension built using React, Typescript, MUI.
 <br>
 Distracted by social media? Losing focus in your work sessions? Want to keep track of your tasks for the day? This extension will remove distractions and help you get things done!
+<br>
+
+## Preview
+
+Extension PopUp
+<br>
+<img src="focus-home-demo.jpg" width="600">
+<br>
+Options Page
+<br>
+<img src="focus-options-demo.jpg" width="600">
+<br>
+Notification
+<br>
+<img src="focus-noti-demo.jpg">
+<br>
 
 ## Functionality
 
