@@ -11,6 +11,7 @@ import {
   FaAmazon,
   FaReddit,
   FaFacebookMessenger,
+  FaLinkedin,
 } from "react-icons/fa";
 import { TbBrandNetflix, TbBrandDisney } from "react-icons/tb";
 
@@ -29,6 +30,7 @@ export const BlockIcons = {
   disneyplus: TbBrandDisney,
   reddit: FaReddit,
   messenger: FaFacebookMessenger,
+  linkedin: FaLinkedin,
 };
 
 export type BlockIconsKeys = keyof typeof BlockIcons;

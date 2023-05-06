@@ -21,12 +21,11 @@ import {
   IconButton,
 } from "@mui/material";
 import {
-  BlockOptions,
   SyncStorageOptions,
   getStoredBlockOptions,
   setStoredBlockOptions,
-  defaultBlockOptions,
 } from "../utils/storage";
+import { defaultBlockOptions, BlockOptions } from "../utils/block";
 import { getStorageOptions, setStorageOptions } from "../utils/storage";
 import { SiteBlockOptions } from "./SiteBlockOptions";
 import { SiteName, updateBlockOptions } from "../utils/block";

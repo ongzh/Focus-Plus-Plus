@@ -8,10 +8,9 @@ import {
   setStoredTasks,
   setStoredCompletedTaskCount,
   setStoredBlockOptions,
-  defaultBlockOptions,
 } from "../utils/storage";
 import { getTimeLeft } from "../utils/time";
-import { resetBlockRules } from "../utils/block";
+import { resetBlockRules, defaultBlockOptions } from "../utils/block";
 chrome.runtime.onInstalled.addListener(() => {
   setStorageOptions({
     focusTime: 25,

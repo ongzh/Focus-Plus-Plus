@@ -1,4 +1,4 @@
-import { BlockOptions, getStoredBlockOptions } from "./storage";
+import { getStoredBlockOptions } from "./storage";
 import RuleActionType = chrome.declarativeNetRequest.RuleActionType;
 import ResourceType = chrome.declarativeNetRequest.ResourceType;
 
@@ -21,7 +21,8 @@ export type SiteName =
   | "twitch"
   | "netflix"
   | "amazon"
-  | "disneyplus";
+  | "disneyplus"
+  | "linkedin";
 
 const blockedSites: Record<SiteName, SiteInfo> = {
   facebook: {
@@ -80,6 +81,46 @@ const blockedSites: Record<SiteName, SiteInfo> = {
     id: 14,
     url: "disneyplus.com",
   },
+  linkedin: {
+    id: 15,
+    url: "linkedin.com",
+  },
+};
+
+export const defaultBlockOptions: BlockOptions = {
+  facebook: false,
+  youtube: false,
+  twitter: false,
+  instagram: false,
+  reddit: false,
+  tiktok: false,
+  whatsapp: false,
+  messenger: false,
+  telegram: false,
+  discord: false,
+  twitch: false,
+  netflix: false,
+  amazon: false,
+  disneyplus: false,
+  linkedin: false,
+};
+
+export type BlockOptions = {
+  facebook: boolean;
+  youtube: boolean;
+  twitter: boolean;
+  instagram: boolean;
+  reddit: boolean;
+  tiktok: boolean;
+  whatsapp: boolean;
+  messenger: boolean;
+  telegram: boolean;
+  discord: boolean;
+  twitch: boolean;
+  netflix: boolean;
+  amazon: boolean;
+  disneyplus: boolean;
+  linkedin: boolean;
 };
 
 export function updateBlockOptions(

@@ -1,5 +1,5 @@
 import { SiteName, resetBlockRules } from "./block";
-
+import { defaultBlockOptions, BlockOptions } from "./block";
 export interface LocalStorage {
   timerStatus: LocalStorageTimerStatus;
 }
@@ -10,40 +10,6 @@ export interface SyncStorage {
   taskCompletionCount?: number;
   blockOptions?: BlockOptions;
 }
-
-export const defaultBlockOptions: BlockOptions = {
-  facebook: false,
-  youtube: false,
-  twitter: false,
-  instagram: false,
-  reddit: false,
-  tiktok: false,
-  whatsapp: false,
-  messenger: false,
-  telegram: false,
-  discord: false,
-  twitch: false,
-  netflix: false,
-  amazon: false,
-  disneyplus: false,
-};
-
-export type BlockOptions = {
-  facebook: boolean;
-  youtube: boolean;
-  twitter: boolean;
-  instagram: boolean;
-  reddit: boolean;
-  tiktok: boolean;
-  whatsapp: boolean;
-  messenger: boolean;
-  telegram: boolean;
-  discord: boolean;
-  twitch: boolean;
-  netflix: boolean;
-  amazon: boolean;
-  disneyplus: boolean;
-};
 
 export interface LocalStorageTimerStatus {
   isFocusing: boolean;

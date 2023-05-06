@@ -14,9 +14,8 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import { SiteName } from "../utils/block";
+import { SiteName, BlockOptions } from "../utils/block";
 import { BlockIcons } from "../utils/blockIcons";
-import { BlockOptions } from "../utils/storage";
 import "./options.css";
 
 const SiteToggle: React.FC<{
