@@ -85,7 +85,13 @@ chrome.alarms.onAlarm.addListener((alarm) => {
             isResting = true;
             if (allowNotifications) {
               registration.showNotification("Time to rest!", {
-                body: `${options.focusTime} minutes has passed! Rest time starts now!`,
+                body:
+                  `${options.focusTime} minutes has passed! ` +
+                  `${
+                    options.restTime !== 0
+                      ? "Rest time starts now!"
+                      : "You can start another focus session!"
+                  }`,
                 icon: "icon.png",
               });
               //remove the block rules
@@ -101,11 +107,13 @@ chrome.alarms.onAlarm.addListener((alarm) => {
           });
         } else if (timerStatus.isResting) {
           restTimer++;
-          if (restTimer >= options.restTime * 60) {
+          // if rest time is 0, then rest time is disabled
+          if (restTimer >= options.restTime * 60 || options.restTime === 0) {
             restTimer = 0;
             timer = 0;
             isResting = false;
-            if (allowNotifications) {
+            //only show notification if rest time is not and notificaitons are enabled
+            if (allowNotifications && options.restTime !== 0) {
               registration.showNotification("Rest Time is Over!", {
                 body: `${options.restTime} minutes has passed! Start another focus session!`,
                 icon: "icon.png",
