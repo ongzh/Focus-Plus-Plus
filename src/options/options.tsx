@@ -113,12 +113,12 @@ const App: React.FC<{}> = () => {
           Focus++ Options
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "end" }}>
-          <IconButton>
-            <RestartAltIcon
-              aria-label="reset-options"
-              onClick={handleResetOptionsButtonClick}
-              color="primary"
-            />
+          <IconButton
+            aria-label="reset-options"
+            onClick={handleResetOptionsButtonClick}
+            color="primary"
+          >
+            <RestartAltIcon />
           </IconButton>
         </Box>
         <CardContent>

@@ -8,6 +8,7 @@ import {
   setStoredTasks,
   setStoredCompletedTaskCount,
   setStoredBlockOptions,
+  getStoredBlockOptions,
 } from "../utils/storage";
 import { getTimeLeft } from "../utils/time";
 import { resetBlockRules, defaultBlockOptions } from "../utils/block";

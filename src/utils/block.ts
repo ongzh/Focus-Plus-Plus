@@ -8,21 +8,21 @@ export type SiteInfo = {
 };
 
 export type SiteName =
-  | "facebook"
-  | "youtube"
-  | "twitter"
-  | "instagram"
-  | "reddit"
-  | "tiktok"
-  | "whatsapp"
-  | "messenger"
-  | "telegram"
-  | "discord"
-  | "twitch"
-  | "netflix"
   | "amazon"
+  | "discord"
   | "disneyplus"
-  | "linkedin";
+  | "facebook"
+  | "instagram"
+  | "linkedin"
+  | "messenger"
+  | "netflix"
+  | "reddit"
+  | "telegram"
+  | "tiktok"
+  | "twitch"
+  | "twitter"
+  | "whatsapp"
+  | "youtube";
 
 const blockedSites: Record<SiteName, SiteInfo> = {
   facebook: {
@@ -88,21 +88,21 @@ const blockedSites: Record<SiteName, SiteInfo> = {
 };
 
 export const defaultBlockOptions: BlockOptions = {
-  facebook: false,
-  youtube: false,
-  twitter: false,
-  instagram: false,
-  reddit: false,
-  tiktok: false,
-  whatsapp: false,
-  messenger: false,
-  telegram: false,
-  discord: false,
-  twitch: false,
-  netflix: false,
   amazon: false,
+  discord: false,
   disneyplus: false,
+  facebook: false,
+  instagram: false,
   linkedin: false,
+  messenger: false,
+  netflix: false,
+  reddit: false,
+  telegram: false,
+  tiktok: false,
+  twitch: false,
+  twitter: false,
+  whatsapp: false,
+  youtube: false,
 };
 
 export type BlockOptions = {
@@ -204,7 +204,7 @@ function removeBlockedSite(site: SiteName) {
         console.log(rules);
       });
       console.log("block " + siteInfo.url + " rule removed");
-    */
+      */
     }
   );
 }
